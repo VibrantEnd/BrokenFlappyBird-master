@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    public GameObject prefab;
-    public float spawnRate = .1f;
-    public float randomVariable = 1f;
-    public Transform wherewewanttheprefabtostart;
+    public GameObject Prefab;
+    public float SpawnRate = .1f;
+    public float RandomVariable = 1f;
+    public Transform PrefabStart;
     
-    private float timer = float.MaxValue;
+    private float timeBetweenPipes = float.MaxValue;
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= spawnRate)
+        timeBetweenPipes += Time.deltaTime;
+        if (timeBetweenPipes >= SpawnRate)
         {
-            DoStuff();
-            timer = 0f;
+            SpawnPipes();
+            timeBetweenPipes = 0f;
         }
     }
 
@@ -24,10 +24,10 @@ public class PipeSpawner : MonoBehaviour
         enabled = true;
     }
 
-    void DoStuff()
+    void SpawnPipes()
     {
-        float yOffset = Random.Range(-randomVariable, randomVariable);
-        Vector3 spawnPosition = wherewewanttheprefabtostart.position + Vector3.up * yOffset;
-        Instantiate(prefab, spawnPosition, Quaternion.identity);
+        float yOffset = Random.Range(-RandomVariable, RandomVariable);
+        Vector3 spawnPosition = PrefabStart.position + Vector3.up * yOffset;
+        Instantiate(Prefab, spawnPosition, Quaternion.identity);
     }
 }

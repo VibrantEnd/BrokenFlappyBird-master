@@ -4,21 +4,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public Bird bird;
-    public PipeSpawner pipeSpawner;
-    public UIManager uiManager;
+    public Bird Bird;
+    public PipeSpawner PipeSpawner;
+    public UIManager UiManager;
+
     private int score = 0;
 
     void Awake()
     {
         Instance = this;
-        pipeSpawner.enabled = false;
+        PipeSpawner.enabled = false;
     }
 
     void Start()
     {
-        uiManager.ShowStart();
-        bird.gameObject.SetActive(false);
+        UiManager.ShowStart();
+        Bird.gameObject.SetActive(false);
     }
 
     public void ResetGame()
@@ -29,40 +30,40 @@ public class GameManager : MonoBehaviour
             Destroy(pipe.gameObject);
         }
         score = 0;
-        uiManager.UpdateScore(score);
+        UiManager.UpdateScore(score);
 
-        uiManager.ShowStart();
-        pipeSpawner.enabled = false;
-        bird.ResetBird();
-        bird.gameObject.SetActive(false);
+        UiManager.ShowStart();
+        PipeSpawner.enabled = false;
+        Bird.ResetBird();
+        Bird.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void ReadyGame()
     {
-        uiManager.HideStart();
-        uiManager.ShowReady();
-        bird.ResetBird();
-        bird.gameObject.SetActive(true);
+        UiManager.HideStart();
+        UiManager.ShowReady();
+        Bird.ResetBird();
+        Bird.gameObject.SetActive(true);
     }
 
     public void StartGame()
     {
         score = 0;
-        uiManager.HideReady();
-        pipeSpawner.enabled = true;
-        bird.StartGame();
+        UiManager.HideReady();
+        PipeSpawner.enabled = true;
+        Bird.StartGame();
     }
 
     public void GameOver()
     {
         Time.timeScale = 0f;
-        uiManager.ShowGameOver();
+        UiManager.ShowGameOver();
     }
 
     public void IncreaseScore()
     {
         score++;
-        uiManager.UpdateScore(0);
+        UiManager.UpdateScore(0);
     }
 }
